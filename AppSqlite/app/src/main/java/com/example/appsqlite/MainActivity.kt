@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,13 +24,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -64,7 +65,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
+            App()
         }
     }
 }
@@ -84,7 +85,7 @@ fun App(){
         Surface(
             modifier = Modifier.fillMaxSize(),
 
-        ) {
+            ) {
             SimpleCenterAlignedTopAppBar()
         }
     }
@@ -138,24 +139,26 @@ fun SimpleCenterAlignedTopAppBar() {
         }
 
 
-        ,content = { innerPadding ->  ProjetoConfig() }
+        ,content = { ProjetoConfig() }
 
     )
 }
 
 
 @Composable
-fun ProjetoConfig(){
+fun ProjetoConfig (){
     Column(
         Modifier
             .background(color = Color(0, 0, 0, 255))
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally){
+
         Row{
-        Banner()
+            Banner()
         }
         Row{
-        Formulario()}
+            Formulario()
+        }
 
     }
 
@@ -196,54 +199,59 @@ fun Formulario(){
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 40.dp)
+            .padding(top = 40.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+
     ) {
         item{
 
 
-    SimpleTextFieldSample("Nome:", courseName.value) {
-        courseName.value = it
-    }
-    Divider(Modifier.height(20.dp))
-    SimpleTextFieldSample("Endereço:", courseEndereco.value) {
-        courseEndereco.value = it
-    }
+            SimpleTextFieldSample("Nome:", courseName.value) {
+                courseName.value = it
+            }
+            Spacer(modifier = Modifier.height(10.dp))
+            SimpleTextFieldSample("Endereço:", courseEndereco.value) {
+                courseEndereco.value = it
+            }
 
-    Divider(Modifier.height(20.dp))
-    SimpleTextFieldSample("Bairro:", coursebairro.value) {
-        coursebairro.value = it
-    }
+            Spacer(modifier = Modifier.height(10.dp))
+            SimpleTextFieldSample("Bairro:", coursebairro.value) {
+                coursebairro.value = it
+            }
 
-    Divider(Modifier.height(20.dp))
-    SimpleTextFieldSample("Cep:", coursecep.value) {
-        coursecep.value = it
-    }
-    Divider(Modifier.height(20.dp))
-    SimpleTextFieldSample("Cidade:", coursecidade.value) {
-        coursecidade.value = it
-    }
-    Divider(Modifier.height(20.dp))
-    SimpleTextFieldSample("Estado:", courseestado.value) {
-        courseestado.value = it
-    }
-    Divider(Modifier.height(20.dp))
-    SimpleTextFieldSample("telefone:", coursetel.value) {
-        coursetel.value = it
-    }
+            Spacer(modifier = Modifier.height(10.dp))
+            SimpleTextFieldSample("Cep:", coursecep.value) {
+                coursecep.value = it
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+            SimpleTextFieldSample("Cidade:", coursecidade.value) {
+                coursecidade.value = it
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+            SimpleTextFieldSample("Estado:", courseestado.value) {
+                courseestado.value = it
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+            SimpleTextFieldSample("telefone:", coursetel.value) {
+                coursetel.value = it
+            }
 
 
-    Divider(Modifier.height(20.dp))
-    ButtonSample(
-        dbHandler,
-        courseName.value,
-        courseEndereco.value,
-        coursebairro.value,
-        coursecep.value,
-        coursecidade.value,
-        courseestado.value,
-        coursetel.value,
-        context
-    )
+            Spacer(modifier = Modifier.height(10.dp))
+            ButtonSample(
+                dbHandler,
+                courseName.value,
+                courseEndereco.value,
+                coursebairro.value,
+                coursecep.value,
+                coursecidade.value,
+                courseestado.value,
+                coursetel.value,
+                context
+            )
         }
 
     }
@@ -272,19 +280,21 @@ fun ButtonSample(
         coursetel.text,
     )
         Toast.makeText(context, "Cadastro realizado", Toast.LENGTH_SHORT).show()
-    },
+    },colors = ButtonDefaults.filledTonalButtonColors(
+        Color(182, 7, 82, 255),
+    ),
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 12.dp)
-    ) {
-        Text("Cadastrar")
-    }
+
+            .padding(horizontal = 5.dp, vertical = 8.dp)
+    ) { Text("Cadastrar") }
+
+
 }
 
 @Composable
 fun Banner(){
     AppSqliteTheme() {
-        var title = "Cadastro"
+        val title = "Cadastro"
 
         Card( modifier = Modifier
             .height(200.dp)
@@ -365,7 +375,7 @@ fun SimpleTextFieldSample(campo: String, value:TextFieldValue, onValueChange:(Te
             },
             singleLine = true,
             colors = TextFieldDefaults.textFieldColors(
-                containerColor = Color(19, 19, 19, 255),
+                containerColor = Color(52, 64, 107, 255),
                 textColor = Color(254, 254, 254, 255),
                 cursorColor = Color(254, 254, 254, 255),
 
@@ -374,8 +384,8 @@ fun SimpleTextFieldSample(campo: String, value:TextFieldValue, onValueChange:(Te
                     backgroundColor = Color(254, 254, 254, 255)),
 
                 placeholderColor = Color(254, 254, 254, 255),
-                focusedIndicatorColor = Color(254, 0, 0, 255),
-                unfocusedIndicatorColor = Color(254, 0, 0, 255),
+                focusedIndicatorColor = Color(170, 3, 75, 255),
+                unfocusedIndicatorColor = Color(170, 3, 75, 255),
 
                 focusedLabelColor = Color(254, 254, 254, 255),
                 unfocusedLabelColor = Color(254, 254, 254, 255)
