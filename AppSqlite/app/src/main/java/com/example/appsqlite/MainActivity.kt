@@ -196,6 +196,11 @@ fun Formulario(){
         mutableStateOf(TextFieldValue())
     }
 
+    val coursecelular = remember {
+        mutableStateOf(TextFieldValue())
+    }
+
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -235,8 +240,13 @@ fun Formulario(){
             }
 
             Spacer(modifier = Modifier.height(10.dp))
-            SimpleTextFieldSample("telefone:", coursetel.value) {
+            SimpleTextFieldSample("Telefone:", coursetel.value) {
                 coursetel.value = it
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+            SimpleTextFieldSample("Celular:", coursecelular.value) {
+                coursecelular.value = it
             }
 
 
@@ -250,6 +260,7 @@ fun Formulario(){
                 coursecidade.value,
                 courseestado.value,
                 coursetel.value,
+                coursecelular.value,
                 context
             )
         }
@@ -268,6 +279,7 @@ fun ButtonSample(
     coursecidade: TextFieldValue,
     courseestado: TextFieldValue,
     coursetel: TextFieldValue,
+    coursecelular: TextFieldValue,
     context: Context
 ) {
     Button(onClick = {  dbHandler.addEndereco(
@@ -278,6 +290,7 @@ fun ButtonSample(
         coursecidade.text,
         courseestado.text,
         coursetel.text,
+        coursecelular.text,
     )
         Toast.makeText(context, "Cadastro realizado", Toast.LENGTH_SHORT).show()
     },colors = ButtonDefaults.filledTonalButtonColors(

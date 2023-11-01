@@ -19,7 +19,8 @@ class DBHandler  (context: Context?) :
                 + CEP_COL + " TEXT,"
                 + CIDADE_COL + " TEXT,"
                 + ESTADO_COL + " TEXT,"
-                + TEL_COL + " TEXT)")
+                + TEL_COL + " TEXT,"
+                + CELULAR_COL + " TEXT)")
 
         db.execSQL(query)
     }
@@ -33,6 +34,7 @@ class DBHandler  (context: Context?) :
         coursecidade: String?,
         courseestado: String?,
         coursetel: String?,
+        coursecelular: String?,
     ) {
         val db = this.writableDatabase
         val values = ContentValues()
@@ -44,6 +46,7 @@ class DBHandler  (context: Context?) :
         values.put(CIDADE_COL,coursecidade)
         values.put(ESTADO_COL,courseestado)
         values.put(TEL_COL,coursetel)
+        values.put(CELULAR_COL,coursetel)
 
         db.insert(TABLE_NAME,null , values)
         db.close()
@@ -56,13 +59,13 @@ class DBHandler  (context: Context?) :
     companion object {
         //criando variáveis constantes para nosso banco de dados.
         // a variável abaixo é para o nome do nosso banco de dados.
-        private const val DB_NAME = "coursedb"
+        private const val DB_NAME = "SqlPam"
 
         // abaixo de int está a versão do nosso banco de dados
         private const val DB_VERSION = 1
 
         // a variável abaixo é para o nome da nossa tabela.
-        private const val TABLE_NAME = "mycourses"
+        private const val TABLE_NAME = "Pessoa"
 
         // a variável abaixo é para nossa coluna id.
 
@@ -85,6 +88,8 @@ class DBHandler  (context: Context?) :
         private const val ESTADO_COL = "Estado"
 
         private const val TEL_COL = "Telefone"
+
+        private const val CELULAR_COL = "Celular"
     }
 
 
@@ -114,7 +119,8 @@ class DBHandler  (context: Context?) :
                         cursorCourses.getString(3),
                         cursorCourses.getString(5),
                         cursorCourses.getString(6),
-                        cursorCourses.getString(7)
+                        cursorCourses.getString(7),
+                        cursorCourses.getString(8)
                     )
                 )
             } while (cursorCourses.moveToNext())
@@ -126,6 +132,6 @@ class DBHandler  (context: Context?) :
     }
 }
 
-class CourseModel(string: String?, string1: String?, string2: String?, string3: String?, string4: String?, string5: String?, string6: String?) {
+class CourseModel(string: String?, string1: String?, string2: String?, string3: String?, string4: String?, string5: String?, string6: String?, string8: String?) {
 
 }
